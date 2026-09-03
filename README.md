@@ -78,10 +78,7 @@ Pushing to `main` builds the site and publishes it to GitHub Pages — `.github/
 
 **https://big-yellow-solutions.github.io/new-myslice/**
 
-Two things have to be true first, and neither can be done from the workflow — the token it runs with can't create a Pages site:
-
-1. The repo is public, or the org is on GitHub Team. Pages doesn't serve private repos on the free plan.
-2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+One thing has to be done by hand first, and it can't be done from the workflow: **Settings → Pages → Build and deployment → Source: GitHub Actions**. The repo is public, so the plan is no longer a factor, but the token the workflow runs with still can't create the Pages site — `enablement: true` on `configure-pages` fails with `Resource not accessible by integration`, so the setting has to be flipped in the UI once.
 
 Until then the run fails at `configure-pages` with `Get Pages site failed … Not Found`. The build step ahead of it still passes, so a red run here doesn't mean the app is broken.
 

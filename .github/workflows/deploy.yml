@@ -26,13 +26,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      # The repo is public, so Pages is available on the free plan. Ask the
-      # action to create the site if it doesn't exist yet rather than
-      # requiring a one-time pass through Settings → Pages; the job's
-      # pages: write scope is what backs this.
+      # Pages has to be enabled by hand once — Settings → Pages → Source:
+      # GitHub Actions. enablement: true does not substitute for it: the
+      # workflow token's pages: write scope covers deploying, not creating
+      # the site, so the action fails with "Resource not accessible by
+      # integration" (retested on the public repo, run 33815759071).
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

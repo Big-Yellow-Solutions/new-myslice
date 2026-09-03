@@ -66,8 +66,24 @@
   -webkit-font-smoothing: antialiased;
 }
 
+/* Paint the shell colour on the root element too. The page is drawn
+   edge to edge (viewport-fit=cover), so the safe-area strips and any
+   overscroll take their colour from here rather than from the browser. */
+html {
+  background: var(--shell-bg);
+}
+
+html,
+body {
+  /* The screen never needs to scroll sideways; anything that overflows is
+     a bug, not something to pan to. */
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--shell-bg);
   font-family: var(--font-stack);
   color: var(--color-text);
@@ -94,6 +110,9 @@ a:hover {
   width: 100%;
   max-width: var(--screen-width);
   min-height: var(--screen-min-height);
+  /* Keep the last of the content clear of the home indicator. Zero on
+     anything without one, so the desktop preview is unaffected. */
+  padding-bottom: env(safe-area-inset-bottom);
   background: var(--surface);
   display: flex;
   flex-direction: column;
@@ -101,12 +120,39 @@ a:hover {
   overflow: hidden;
 }
 
+/* ---- Phone: the screen *is* the page ----
+   There is no preview frame to show around it, so the shell stops being a
+   grey mat and the screen drops the fixed 414 x 896 preview box to fill
+   the viewport instead. 480px clears the widest phones in portrait
+   (the 430px iPhone Pro Max included) without reaching the desktop layout. */
+@media (max-width: 480px) {
+  html,
+  body,
+  .shell {
+    background: var(--surface);
+  }
+
+  .shell {
+    /* dvh so the bar collapsing in mobile Safari can't expose a gap. */
+    min-height: 100dvh;
+  }
+
+  .screen {
+    max-width: none;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+}
+
 /* ---- App bar ---- */
 .appbar {
   background: var(--color-appbar);
   color: var(--color-on-appbar);
-  height: var(--appbar-height);
-  padding: 0 18px;
+  /* The bar runs under the status bar / notch so its orange reaches the
+     top edge; the inset is added to its height so the title and icons stay
+     where the design puts them. Both terms are 0 without a notch. */
+  height: calc(var(--appbar-height) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 18px 0;
   display: flex;
   align-items: center;
   flex: none;
@@ -543,7 +589,9 @@ a:hover {
 
 .overflow-menu__list {
   position: absolute;
-  top: calc(var(--appbar-height) - 4px);
+  /* Hangs just under the bar. Measured off the bar itself rather than
+     --appbar-height so the safe-area inset above is carried along. */
+  top: calc(100% - 4px);
   right: 12px;
   min-width: 220px;
   background: var(--surface);

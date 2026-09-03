@@ -76,7 +76,7 @@ The saved record itself lives in `useProfile`. Only one tab body renders at a ti
 
 Pushing to `main` builds the site and publishes it to GitHub Pages — `.github/workflows/deploy.yml`. The live URL is:
 
-**https://bigyellowsolutions.github.io/new-myslice/**
+**https://big-yellow-solutions.github.io/new-myslice/**
 
 Two things have to be true first, and neither can be done from the workflow — the token it runs with can't create a Pages site:
 

@@ -78,7 +78,12 @@ Pushing to `main` builds the site and publishes it to GitHub Pages — `.github/
 
 **https://teddy51906.github.io/new-myslice/**
 
-The workflow turns Pages on itself (`enablement: true` on `configure-pages`), so no setup in Settings is needed. If that step ever fails on permissions, set it by hand: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Two things have to be true first, and neither can be done from the workflow — the token it runs with can't create a Pages site:
+
+1. The repo is public, or the account has GitHub Pro. Pages doesn't serve private repos on the free plan. (Pro is free through the GitHub Student Developer Pack.)
+2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Until then the run fails at `configure-pages` with `Get Pages site failed … Not Found`. The build step ahead of it still passes, so a red run here doesn't mean the app is broken.
 
 `vite.config.ts` sets `base: '/new-myslice/'` because Pages serves a project site from a subpath, not the domain root. Rename the repo and that value has to change with it.
 

@@ -26,11 +26,12 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Pages has to be enabled on the repo first — Settings → Pages →
+      # Source: GitHub Actions. The workflow token can't create the site
+      # itself (enablement: true fails with "Resource not accessible by
+      # integration"), and Pages needs the repo to be public unless the
+      # account has GitHub Pro.
       - uses: actions/configure-pages@v5
-        # Turns Pages on and points it at Actions, so the repo needs no
-        # manual setup in Settings before the first deploy.
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

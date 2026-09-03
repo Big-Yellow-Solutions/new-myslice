@@ -78,7 +78,7 @@ Pushing to `main` builds the site and publishes it to GitHub Pages — `.github/
 
 **https://teddy51906.github.io/new-myslice/**
 
-One-time setup in the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Without it the workflow's deploy step fails.
+The workflow turns Pages on itself (`enablement: true` on `configure-pages`), so no setup in Settings is needed. If that step ever fails on permissions, set it by hand: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 `vite.config.ts` sets `base: '/new-myslice/'` because Pages serves a project site from a subpath, not the domain root. Rename the repo and that value has to change with it.
 

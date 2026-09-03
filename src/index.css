@@ -38,6 +38,12 @@
   --icon-chevron: #3a3a3a;
   --icon-chevron-row: #4a4a4a;
 
+  /* Editing chrome — not part of the original handoff */
+  --color-danger: #a32118;
+  --surface-error: #fdecea;
+  --border-input: #8c8c8c;
+  --border-input-focus: var(--color-accent);
+
   /* Type scale */
   --fs-label: 16px;
   --fs-secondary: 17px;
@@ -372,4 +378,162 @@ a:hover {
 .names-table__type {
   font-size: var(--fs-secondary);
   color: var(--color-text-secondary);
+}
+
+/* ---- Editing ----
+   Everything below is the edit affordance layer. It was not part of the
+   handoff, so it borrows the tokens above rather than introducing new sizes. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.appbar__button {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  border: 1px solid rgb(255 255 255 / 0.7);
+  color: var(--color-on-appbar);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  padding: 7px 14px;
+  cursor: pointer;
+}
+
+.appbar__button--primary {
+  background: var(--color-on-appbar);
+  color: var(--color-appbar);
+  border-color: var(--color-on-appbar);
+}
+
+.appbar__edit-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.text-input {
+  appearance: none;
+  font-family: inherit;
+  font-size: var(--fs-value);
+  color: var(--color-text-value);
+  background: var(--surface);
+  border: 1px solid var(--border-input);
+  border-radius: 0;
+  padding: 9px 10px;
+  width: 100%;
+}
+
+.text-input:focus {
+  outline: 2px solid var(--border-input-focus);
+  outline-offset: -2px;
+}
+
+.text-input--id {
+  max-width: 200px;
+}
+
+.link-button {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  border: 0;
+  padding: 0;
+  font-size: var(--fs-label);
+  font-weight: 600;
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+.link-button:disabled {
+  color: var(--color-text-label);
+  cursor: default;
+}
+
+.link-button--danger {
+  color: var(--color-danger);
+}
+
+.link-button--block {
+  display: block;
+  padding: 14px 2px 0;
+}
+
+/* Photo picker in the ID strip */
+.id-strip__photo-button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  position: relative;
+  display: block;
+  flex: none;
+  cursor: pointer;
+}
+
+.id-strip__photo-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgb(0 0 0 / 0.62);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-align: center;
+  padding: 3px 0;
+}
+
+.id-strip__photo-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.id-strip__error {
+  margin: 8px 0 0;
+  font-size: var(--fs-label);
+  color: var(--color-danger);
+  max-width: 280px;
+}
+
+.banner {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: var(--fs-label);
+  flex: none;
+}
+
+.banner--error {
+  background: var(--surface-error);
+  color: var(--color-danger);
+  border-bottom: 1px solid var(--border-strip);
+}
+
+/* Names table in edit mode */
+.names-table__row--editing {
+  align-items: flex-start;
+  cursor: default;
+}
+
+.names-table__row--editing:hover {
+  background: none;
+}
+
+.names-table__cell--editing {
+  flex: 1;
+  gap: 10px;
+}
+
+.screen__footer {
+  padding: 32px 14px 24px;
+  border-top: 1px solid var(--border-rule);
+  margin-top: 32px;
 }

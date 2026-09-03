@@ -1,0 +1,375 @@
+/* Design tokens from the Student Profile handoff.
+   Colors, sizes and spacing here are the actual values from the design —
+   change them here rather than in component files. */
+:root {
+  /* Brand / accent */
+  --color-appbar: #d14400;
+  --color-accent: #9c3b08;
+  --color-info-badge: #1a6b8a;
+
+  /* Syracuse brand reference (not used for the in-product chrome) */
+  --color-su-orange: #f76900;
+  --color-su-blue: #000e54;
+  --color-su-dark-orange: #d74100;
+
+  /* Text */
+  --color-text: #000;
+  --color-text-value: #111;
+  --color-text-strong: #1a1a1a;
+  --color-text-secondary: #2b2b2b;
+  --color-text-label: #5c5c5c;
+  --color-on-appbar: #fff;
+
+  /* Borders */
+  --border-rule: #cfcfcf;
+  --border-table: #c4c4c4;
+  --border-strip: #d8d8d8;
+  --border-photo: #9a9a9a;
+  --appbar-divider: #7fb2b8;
+
+  /* Surfaces */
+  --surface: #fff;
+  --surface-strip: #f7f7f7;
+  --surface-table-head: #f2f2f2;
+  --surface-row-hover: #fafafa;
+  --shell-bg: #55585c;
+
+  /* Icon strokes */
+  --icon-chevron: #3a3a3a;
+  --icon-chevron-row: #4a4a4a;
+
+  /* Type scale */
+  --fs-label: 16px;
+  --fs-secondary: 17px;
+  --fs-value: 18px;
+  --fs-tab: 19px;
+  --fs-section: 20px;
+  --fs-appbar: 21px;
+  --fs-h2: 24px;
+
+  /* Layout */
+  --screen-width: 414px;
+  --screen-min-height: 896px;
+  --appbar-height: 66px;
+
+  --font-stack: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--shell-bg);
+  font-family: var(--font-stack);
+  color: var(--color-text);
+}
+
+a {
+  color: var(--color-su-dark-orange);
+}
+
+a:hover {
+  color: var(--color-su-blue);
+}
+
+/* ---- Preview shell (not part of the screen) ---- */
+.shell {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background: var(--shell-bg);
+}
+
+.screen {
+  width: 100%;
+  max-width: var(--screen-width);
+  min-height: var(--screen-min-height);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---- App bar ---- */
+.appbar {
+  background: var(--color-appbar);
+  color: var(--color-on-appbar);
+  height: var(--appbar-height);
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.appbar__divider {
+  width: 2px;
+  height: 26px;
+  background: var(--appbar-divider);
+  margin: 0 16px;
+}
+
+.appbar__title {
+  color: var(--color-on-appbar);
+  font-size: var(--fs-appbar);
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.appbar__actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Icon buttons carry no chrome of their own — the design shows bare icons. */
+.icon-button {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  color: inherit;
+  cursor: pointer;
+}
+
+.icon-button--overflow {
+  margin-right: 6px;
+}
+
+/* ---- ID header strip ---- */
+.id-strip {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 14px 16px;
+  background: var(--surface-strip);
+  border-bottom: 1px solid var(--border-strip);
+  flex: none;
+}
+
+.id-strip__frame {
+  width: 50px;
+  height: 66px;
+  border: 1px solid var(--border-photo);
+  padding: 2px;
+  background: var(--surface);
+  flex: none;
+}
+
+.id-strip__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.id-strip__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #8f9296 0%, #7d8084 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.id-strip__text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.id-strip__label {
+  font-size: var(--fs-secondary);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.id-strip__value {
+  font-size: var(--fs-tab);
+  color: var(--color-text-strong);
+  letter-spacing: 0.2px;
+}
+
+/* ---- Tab bar ---- */
+.tabbar {
+  display: flex;
+  border-bottom: 1px solid var(--border-rule);
+  padding: 0 12px;
+  flex: none;
+}
+
+.tabbar__tab {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  border: 0;
+  border-bottom: 4px solid transparent;
+  padding: 16px 14px 12px;
+  font-size: var(--fs-tab);
+  letter-spacing: -0.1px;
+  font-weight: 400;
+  color: var(--color-text-strong);
+  cursor: pointer;
+}
+
+.tabbar__tab--active {
+  font-weight: 700;
+  color: var(--color-text);
+  border-bottom-color: var(--color-accent);
+}
+
+/* ---- Tab content ---- */
+.tabpanel {
+  padding: 26px 14px 0;
+  flex: 1;
+}
+
+.tabpanel__heading {
+  margin: 0 0 44px;
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.2px;
+}
+
+/* ---- Label / value pair ---- */
+.field__label {
+  font-size: var(--fs-label);
+  font-weight: 700;
+  color: var(--color-text-label);
+  margin-bottom: 6px;
+}
+
+.field__value {
+  font-size: var(--fs-value);
+  color: var(--color-text-value);
+}
+
+.field--dob {
+  margin-bottom: 26px;
+}
+
+.field-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.field-stack--tight {
+  gap: 18px;
+}
+
+/* ---- Accordion ---- */
+.accordion + .accordion {
+  margin-top: 38px;
+}
+
+.accordion__header {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--border-rule);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 0 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.accordion__chevron {
+  flex: none;
+  transition: none;
+}
+
+.accordion__chevron--collapsed {
+  transform: rotate(-90deg);
+}
+
+.accordion__label {
+  font-size: var(--fs-section);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.accordion__body {
+  padding: 22px 4px 0;
+}
+
+/* ---- Info badge ---- */
+.info-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-info-badge);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  font-family: Georgia, serif;
+  margin-bottom: 14px;
+}
+
+/* ---- Names table ---- */
+.names-table {
+  border: 1px solid var(--border-table);
+  border-bottom: none;
+}
+
+.names-table__head {
+  background: var(--surface-table-head);
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border-table);
+  font-size: var(--fs-secondary);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.names-table__row {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  border: 0;
+  border-bottom: 1px solid var(--border-table);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.names-table__row:hover {
+  background: var(--surface-row-hover);
+}
+
+.names-table__cell {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.names-table__name {
+  font-size: var(--fs-value);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.names-table__type {
+  font-size: var(--fs-secondary);
+  color: var(--color-text-secondary);
+}

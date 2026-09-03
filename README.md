@@ -76,11 +76,11 @@ The saved record itself lives in `useProfile`. Only one tab body renders at a ti
 
 Pushing to `main` builds the site and publishes it to GitHub Pages — `.github/workflows/deploy.yml`. The live URL is:
 
-**https://teddy51906.github.io/new-myslice/**
+**https://bigyellowsolutions.github.io/new-myslice/**
 
 Two things have to be true first, and neither can be done from the workflow — the token it runs with can't create a Pages site:
 
-1. The repo is public, or the account has GitHub Pro. Pages doesn't serve private repos on the free plan. (Pro is free through the GitHub Student Developer Pack.)
+1. The repo is public, or the org is on GitHub Team. Pages doesn't serve private repos on the free plan.
 2. **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 Until then the run fails at `configure-pages` with `Get Pages site failed … Not Found`. The build step ahead of it still passes, so a red run here doesn't mean the app is broken.

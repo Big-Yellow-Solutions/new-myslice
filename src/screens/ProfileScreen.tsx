@@ -68,6 +68,10 @@ export function ProfileScreen() {
       <AppBar
         title="Profile"
         showDefaultActions={!editing}
+        menuItems={[
+          { label: 'Edit profile', onSelect: startEditing },
+          { label: 'Reset to original profile', onSelect: resetProfile, danger: true },
+        ]}
         actions={
           editing ? (
             <div className="appbar__edit-actions">
@@ -82,11 +86,7 @@ export function ProfileScreen() {
                 Save
               </button>
             </div>
-          ) : (
-            <button type="button" className="appbar__button" onClick={startEditing}>
-              Edit
-            </button>
-          )
+          ) : null
         }
       />
 
@@ -221,14 +221,6 @@ export function ProfileScreen() {
           </div>
         </div>
       )}
-
-      {editing ? (
-        <div className="screen__footer">
-          <button type="button" className="link-button link-button--danger" onClick={resetProfile}>
-            Reset to original profile
-          </button>
-        </div>
-      ) : null}
     </div>
   )
 }

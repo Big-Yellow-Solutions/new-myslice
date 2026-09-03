@@ -1,12 +1,15 @@
 import type { ReactNode } from 'react'
 import { ArrowLeftIcon, BellIcon, OverflowIcon } from './icons'
+import { OverflowMenu, type MenuItem } from './OverflowMenu'
 
 type AppBarProps = {
   title: string
   onBack?: () => void
   onNotifications?: () => void
   onOverflow?: () => void
-  /** Rendered at the left of the action group — Edit, or Cancel/Save. */
+  /** Items for the three-dot menu. Falls back to `onOverflow` when empty. */
+  menuItems?: MenuItem[]
+  /** Rendered at the left of the action group — Cancel/Save while editing. */
   actions?: ReactNode
   /** Hide the bell and overflow to make room while editing. */
   showDefaultActions?: boolean
@@ -17,6 +20,7 @@ export function AppBar({
   onBack,
   onNotifications,
   onOverflow,
+  menuItems,
   actions,
   showDefaultActions = true,
 }: AppBarProps) {
@@ -39,14 +43,18 @@ export function AppBar({
             >
               <BellIcon />
             </button>
-            <button
-              type="button"
-              className="icon-button icon-button--overflow"
-              onClick={onOverflow}
-              aria-label="More options"
-            >
-              <OverflowIcon />
-            </button>
+            {menuItems && menuItems.length > 0 ? (
+              <OverflowMenu items={menuItems} />
+            ) : (
+              <button
+                type="button"
+                className="icon-button icon-button--overflow"
+                onClick={onOverflow}
+                aria-label="More options"
+              >
+                <OverflowIcon />
+              </button>
+            )}
           </>
         ) : null}
       </div>

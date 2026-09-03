@@ -12,8 +12,10 @@ React 18 + TypeScript + Vite. No UI library — the screen is plain components p
 
 ```bash
 npm install
-npm run dev      # http://localhost:5173
+npm run dev      # http://localhost:5173/new-myslice/
 ```
+
+The dev server lives under `/new-myslice/` because that's the path GitHub Pages serves the project from — see Deploying below.
 
 Other scripts: `npm run build` (typecheck + production bundle), `npm run preview`, `npm run typecheck`.
 
@@ -33,6 +35,7 @@ src/
   screens/ProfileScreen.tsx    the screen: tab, accordion and edit state
   components/
     AppBar.tsx                 orange bar: back, title, actions, bell, overflow
+    OverflowMenu.tsx           the three-dot button and its menu
     IdHeader.tsx               photo frame + ID strip, photo picker in edit mode
     TabBar.tsx                 Personal / Biographic
     Field.tsx                  label/value pair, text input in edit mode
@@ -43,7 +46,7 @@ src/
 
 ## Editing
 
-**Edit** in the app bar swaps every value for a text input and puts **Cancel** / **Save** in its place. Edits go into a draft copy of the record — Cancel throws the draft away, Save writes it to the device. **Reset to original profile** at the bottom of edit mode clears the stored record and restores the defaults in `data/student.ts`.
+The three-dot menu in the app bar holds **Edit profile** and **Reset to original profile**. Editing swaps every value for a text input and replaces the bell and three dots with **Cancel** / **Save** — the bar has no room for both, and there is nothing else to reach for mid-edit. Edits go into a draft copy of the record, so Cancel throws the draft away and Save writes it to the device. Reset clears the stored record and restores the defaults in `data/student.ts`.
 
 Editable: student ID, photo, date of birth, the name rows (add, edit, remove), citizenship, and all three biographic fields. Everything is a free-text input — the real field definitions for citizenship and biographic aren't confirmed, so nothing is constrained to a list yet.
 
@@ -68,6 +71,16 @@ There is no sign-in yet. The record is stored in `localStorage` under `myslice.p
 | `error` (save failure banner) | `null` |
 
 The saved record itself lives in `useProfile`. Only one tab body renders at a time; accordion bodies mount and unmount. No animation — the design specifies none. If transitions get added later, keep to 150/250 ms with `cubic-bezier(0.4, 0, 0.2, 1)`, no spring or bounce.
+
+## Deploying
+
+Pushing to `main` builds the site and publishes it to GitHub Pages — `.github/workflows/deploy.yml`. The live URL is:
+
+**https://teddy51906.github.io/new-myslice/**
+
+One-time setup in the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Without it the workflow's deploy step fails.
+
+`vite.config.ts` sets `base: '/new-myslice/'` because Pages serves a project site from a subpath, not the domain root. Rename the repo and that value has to change with it.
 
 ## Design tokens
 

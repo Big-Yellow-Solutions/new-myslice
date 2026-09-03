@@ -110,6 +110,9 @@ a:hover {
   display: flex;
   align-items: center;
   flex: none;
+  /* Anchors the overflow menu, which hangs below the bar. */
+  position: relative;
+  z-index: 1;
 }
 
 .appbar__divider {
@@ -532,8 +535,42 @@ a:hover {
   gap: 10px;
 }
 
-.screen__footer {
-  padding: 32px 14px 24px;
+/* Overflow menu */
+.overflow-menu {
+  display: flex;
+  align-items: center;
+}
+
+.overflow-menu__list {
+  position: absolute;
+  top: calc(var(--appbar-height) - 4px);
+  right: 12px;
+  min-width: 220px;
+  background: var(--surface);
+  border: 1px solid var(--border-table);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.22);
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+
+.overflow-menu__item {
+  appearance: none;
+  background: none;
+  font-family: inherit;
+  border: 0;
+  text-align: left;
+  padding: 14px 18px;
+  font-size: var(--fs-secondary);
+  color: var(--color-text-value);
+  cursor: pointer;
+}
+
+.overflow-menu__item:hover {
+  background: var(--surface-row-hover);
+}
+
+.overflow-menu__item--danger {
+  color: var(--color-danger);
   border-top: 1px solid var(--border-rule);
-  margin-top: 32px;
 }
